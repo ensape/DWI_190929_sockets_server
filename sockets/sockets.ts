@@ -33,7 +33,7 @@ export const configurarUsuario = (cliente: Socket, io: socketIO.Server) =>
 {
     cliente.on('configurar-usuario', (payload: { nombre: string}, callback: Function) => {
 
-        usuariosConectados.actualizaNombre( cliente.id, payload);
+        usuariosConectados.actualizaNombre( cliente.id, payload.nombre);
         console.log('Configurando Usuario', payload);
 
         callback({

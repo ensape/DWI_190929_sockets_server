@@ -35,7 +35,7 @@ export class UsuariosLista {
     }
 
     // Obtener Usuario en una sala particular
-    public getUusuarioEnSala ( sala:string) {
+    public getUsuarioEnSala ( sala:string) {
         return this.lista.filter( usuario => usuario.sala === sala); 
     }
 
