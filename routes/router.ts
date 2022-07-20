@@ -1,37 +1,46 @@
+
 import { Router, Request, Response } from "express";
-import  Server  from "../classes/server";
+import Server from '../classes/server';
 
-const router = Router();
 
-router.get('/mensajes',(req: Request, res: Response) => {
+export const router = Router();
+
+router.get('/mensajes', (req: Request, res: Response) =>{
     res.json({
         ok:true,
-        mensaje: 'Tortugas Ninja'
-    });
+        mensaje:'Todo esta bien C:'
+    }); 
 });
-
-router.post('/mensajes', (req:Request, res:Response) => {
+ router.post('/mensajes', (req:Request, res:Response)=>{
+    
     const cuerpo = req.body.cuerpo
     const de = req.body.de
+
+    const payload = {cuerpo, de};
+
+    const server = Server.instance;
+    server.io.emit('mensaje-nuevo', payload);
+
     res.json({
         ok:true,
         cuerpo,
-        de,
+        de
     });
- },
-router.post('/mensajes/:para', (req:Request, res:Response) => {
-    const cuerpo = req.body.cuerpo
-    const de = req.body.de
-    const para = req.params.para
+ });
+
+ router.post('/mensajes/:para', (req:Request, res:Response)=>{
+    const cuerpo = req.body.cuerpo;
+    const de = req.body.de;
+    const para = req.params.para;
     
+
     const payload = {
         de,
         cuerpo
     }
-
-    const server  = Server.instance;
-
-    server.io.in( para).emit( 'mensaje-privado', payload);
+    const server = Server.instance;
+    //server.io.in(para).emit('mensaje-privado')
+    server.io.in(para).emit('mensaje-privado', payload) //payload= {de: 'IDGSW Enrique Santiago Peralta', cuerpo: 'Hola'}
 
     res.json({
         ok:true,
@@ -39,8 +48,55 @@ router.post('/mensajes/:para', (req:Request, res:Response) => {
         de,
         para
     });
- }
+ });
 
-));
+ export default router;
 
-export default router;
+
+
+// import { Router, Request, Response } from "express";
+// import  Server  from "../classes/server";
+
+// const router = Router();
+
+// router.get('/mensajes',(req: Request, res: Response) => {
+//     res.json({
+//         ok:true,
+//         mensaje: 'Tortugas Ninja'
+//     });
+// });
+
+// router.post('/mensajes', (req:Request, res:Response) => {
+//     const cuerpo = req.body.cuerpo
+//     const de = req.body.de
+//     res.json({
+//         ok:true,
+//         cuerpo,
+//         de,
+//     });
+//  },
+// router.post('/mensajes/:para', (req:Request, res:Response) => {
+//     const cuerpo = req.body.cuerpo
+//     const de = req.body.de
+//     const para = req.params.para
+    
+//     const payload = {
+//         de,
+//         cuerpo
+//     }
+
+//     const server  = Server.instance;
+
+//     server.io.in( para).emit('mensaje-privado', payload);
+
+//     res.json({
+//         ok:true,
+//         cuerpo,
+//         de,
+//         para
+//     });
+//  }
+
+// ));
+
+// export default router;
