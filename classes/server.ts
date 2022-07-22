@@ -5,6 +5,8 @@ import http from 'http';
 import * as socket from '../sockets/sockets';
 
 
+
+
 export default class Server{
 
     private static _instance: Server;
@@ -16,11 +18,13 @@ export default class Server{
     private httpServer : http.Server;
 
 
+
    private constructor(){
     
         this.app = express();
         this.port = SERVER_PORT;
         this.httpServer= new http.Server(this.app);
+        //this.io = new socketIO (this.httpServer);
         this.io = new socketIO.Server(this.httpServer,
             {
                 cors: {origin:true, credentials:true}
