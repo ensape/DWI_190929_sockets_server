@@ -68,7 +68,7 @@ router.get('/*usuarios',( req: Request, res: Response) => {
 
 // Creacion de Servicio Obtener Usuario y sus nombres
 //router.get('/*usuarios/detalle',( req: Request, res: Response) => {
-router.get('/usuarios/detalle', (  req: Request, res: Response ) => {
+    router.get('/usuarios/detalle', (  req: Request, res: Response ) => {
 
 
         res.json({
