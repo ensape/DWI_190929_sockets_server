@@ -52,6 +52,9 @@ export default class Server{
             //Configurar Usuario 
             socket.configurarUsuario(cliente, this.io);
 
+            //obtener usuarios activos
+            socket.obtenerUsuarios( cliente, this.io);
+
             //mensaje
             socket.mensaje(cliente,this.io);
 

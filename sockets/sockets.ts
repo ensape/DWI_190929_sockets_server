@@ -49,3 +49,12 @@ export const configurarUsuario = (cliente: Socket, io: socketIO.Server) =>
         })
     });
 }
+
+//Obtener Usuarios (deve escucha nuestro cliente de angular se tiene que emitir obtener usuarios, el servidor la escuchara)
+export const obtenerUsuarios = (cliente: Socket, io: socketIO.Server) =>
+{
+    cliente.on('obtener-usuario', () => {
+//mandar informacion a la persona que se esta conectando ignorando el resto
+        io.to(cliente.id).emit('usuarios-activos', usuariosConectados.getLista() );
+    });
+}
