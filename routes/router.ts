@@ -1,6 +1,5 @@
 
 import { Router, Request, Response } from 'express';
-import { Socket } from 'socket.io';
 import Server from '../classes/server';
 import { usuariosConectados } from '../sockets/sockets';
 
@@ -50,7 +49,7 @@ router.get('/mensajes', (req: Request, res: Response) =>{
         ok:true,
         cuerpo,
         de,
-        //para
+        para
     });
  });
 
@@ -68,12 +67,14 @@ router.get('/*usuarios',( req: Request, res: Response) => {
 });
 
 // Creacion de Servicio Obtener Usuario y sus nombres
-router.get('/*usuarios/detalle',( req: Request, res: Response) => {
+//router.get('/*usuarios/detalle',( req: Request, res: Response) => {
+router.get('/usuarios/detalle', (  req: Request, res: Response ) => {
 
-    res.json({
-        ok:true,
-        clientes: usuariosConectados.getLista()
-    });
+
+        res.json({
+            ok: true,
+            clientes: usuariosConectados.getLista()
+        });
 });
  export default router;
 
